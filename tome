@@ -1,0 +1,89 @@
+package com.example.edittext;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class AtvCalculadora2 extends AppCompatActivity {
+
+    String strn1 = "";
+    String strn2 = "";
+
+    String op = "";
+
+    Button bntClear;
+    Button bntEquals2;
+    Button bntDot;
+
+    TextView txtResult2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_atv_calculadora2);
+
+        //bntClear = findViewById(R.id.btnClear);
+        //bntEquals2 = findViewById(R.id.btnEquals2);
+        bntDot = findViewById(R.id.btnDot);
+       txtResult2 = findViewById(R.id.txtResult2);
+    }
+
+    public void clickNumbers(View view) {
+        Button bnt = (Button) view;
+        if (op.equals("")){
+            strn1 += bnt.getText().toString();
+        }else {
+            strn2 += bnt.getText().toString();
+        }
+        writeExpression();
+    }
+
+    public void clickBtnOp2(View view) {
+        Button bnt = (Button) view;
+        op = bnt.getText().toString();
+        writeExpression();
+    }
+    
+    //
+
+    public void writeExpression(){
+        TextView txtExpression = findViewById(R.id.txtExpression);
+        txtExpression.setText(strn1 + " " + op + " " + strn2);
+    }
+
+    public void clickBtnClear(View view) {
+        strn1 = strn2 = op = "";
+        txtResult2.setText("0,00");
+        writeExpression();
+    }
+
+    public void clickBtnEquals2(View view) {
+        float n1 = Float.parseFloat(strn1);
+        float n2 = Float.parseFloat(strn2);
+        float result = 0;
+        switch (op){
+            case "+": result = n1 + n2;
+                break;
+            case "-": result = n1 - n2;
+                break;
+            case "*": result = n1 * n2;
+                break;
+            case "/": result = n1 / n2;
+                break;
+        }
+        txtResult2.setText("" + result);
+    }
+
+    public void clickBtnDot(View view) {
+        Button bnt = (Button) view;
+        if (op.equals("")){
+            strn1 += bnt.getText().toString();
+        }else {
+            strn2 += bnt.getText().toString();
+        }
+        writeExpression();
+    }
+}
